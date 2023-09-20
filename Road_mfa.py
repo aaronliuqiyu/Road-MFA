@@ -1764,7 +1764,7 @@ ax2.yaxis.set_major_formatter(formatter)
 fig.tight_layout(pad=1.0)
 plt.savefig("scenario.png", dpi=500)
 plt.show()
-
+# Emission plot#
 asp_emission_bau = p_asp_bau + k_asp_bau + s_asp_bau 
 steel_emission_bau = p_steel_bau + k_steel_bau + s_steel_bau 
 grv_emission_bau = p_grv_bau + k_grv_bau + s_grv_bau
