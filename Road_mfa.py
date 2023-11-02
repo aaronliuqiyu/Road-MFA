@@ -1621,21 +1621,23 @@ ax4.set_xlabel(xlabel='Years',fontsize=12,labelpad=5)
 ax1.set_ylabel(ylabel='Asphalt [ton]',fontsize=12,labelpad=5)
 ax3.set_ylabel(ylabel='Steel [ton]',fontsize=12,labelpad=5)
 
-ax1.set_title('Inflow', fontweight="bold")
-ax2.set_title('Outflow', fontweight="bold")
-ax3.set_title('Inflow', fontweight="bold")
-ax4.set_title('Outflow', fontweight="bold")
+ax1.set_title('Inflow')
+ax2.set_title('Outflow')
+ax3.set_title('Inflow')
+ax4.set_title('Outflow')
 
-ax1.tick_params(axis='x', rotation=45)
-ax2.tick_params(axis='x', rotation=45)
-ax3.tick_params(axis='x', rotation=45)
-ax4.tick_params(axis='x', rotation=45)
+tick_spacing = 5
 
-ax1.yaxis.set_major_formatter(formatter)
-ax3.yaxis.set_major_formatter(formatter)
+ax1.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
+ax2.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
+ax3.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
+ax4.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
+
+
+ax1.ticklabel_format(axis='y', style='plain')
 
 fig.tight_layout(pad=1.0)
-plt.savefig("flows.png", dpi=500)
+plt.savefig("flows.png", dpi=500, bbox_inches='tight')
 plt.show()
 
 # Embodied Emissions#
@@ -1762,8 +1764,9 @@ ax1.yaxis.set_major_formatter(formatter)
 ax2.yaxis.set_major_formatter(formatter)
 
 fig.tight_layout(pad=1.0)
-plt.savefig("scenario.png", dpi=500)
+plt.savefig("scenario.png", dpi=500, bbox_inches='tight')
 plt.show()
+
 # Emission plot#
 asp_emission_bau = p_asp_bau + k_asp_bau + s_asp_bau 
 steel_emission_bau = p_steel_bau + k_steel_bau + s_steel_bau 
@@ -1825,6 +1828,16 @@ ax2.legend(fontsize=9, loc = "upper right")
 ax3.legend(fontsize=9, loc = "upper right")
 ax3.legend().set_visible(False)
 ax4.legend(fontsize=9, loc = "upper right")
+
+handles, labels = ax2.get_legend_handles_labels()
+# sort both labels and handles by labels
+order = [2,1,0]
+ax2.legend([handles[idx] for idx in order],[labels[idx] for idx in order])
+
+handles, labels = ax4.get_legend_handles_labels()
+# sort both labels and handles by labels
+order = [2,1,0]
+ax4.legend([handles[idx] for idx in order],[labels[idx] for idx in order])
 
 fig.tight_layout(pad=0.5)
 plt.savefig("emissions.png", dpi=500)
